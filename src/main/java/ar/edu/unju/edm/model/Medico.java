@@ -105,8 +105,8 @@ public class Medico implements Serializable{
 
 	public List<Reserva> getReservas() {
 		//si no se agrega lo siguiente devuelve listas vacias
-		IMedicoDao medicoDao = new MedicoDaoImp();
-		reservas = medicoDao.obtenerTodasReservas(getId());
+//		IMedicoDao medicoDao = new MedicoDaoImp();
+//		reservas = medicoDao.obtenerTodasReservas(getId());
 		return reservas;
 	}
 
@@ -167,16 +167,22 @@ public class Medico implements Serializable{
 	
 	
 	public List<Paciente> mostrarPacientes(int edad){
-		List<Paciente> pacientes = new ArrayList<>();
-		for(Reserva reserv:getReservas()) {
-			Paciente paciente = reserv.getPaciente();
-			pacientes.add(paciente);
-		}
 		if(edad<1 || edad >100) {
 			return null;
-		}
-		else {
-			return pacientes;
+		}else {
+//			se crea la lista que va a almacenar todos los pacientes del medico
+			List<Paciente> todosPacientes = new ArrayList<>();
+			List<Paciente> pacientesMayorEdad = new ArrayList<>();
+			for(Reserva reserv:getReservas()) {
+				Paciente paciente = reserv.getPaciente();
+				todosPacientes.add(paciente);
+			}
+			for(Paciente pacient:todosPacientes) {
+				if(pacient.getEdad()>edad) {
+					pacientesMayorEdad.add(pacient);
+				}
+			}
+			return pacientesMayorEdad;
 		}
 		
 	}

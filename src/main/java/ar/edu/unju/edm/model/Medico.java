@@ -2,6 +2,7 @@ package ar.edu.unju.edm.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,32 +137,48 @@ public class Medico implements Serializable{
 				+ "]";
 	}
 	
-	
+	//SACARRR
 //	public int num() {
 //		int n = (int)getReservas().stream().count();
 //		return n;
 //	}
-//	
-//	public String mostrarReservas() {
-//		String reservas = getReservas().toString();
-//		return reservas;
-//	}
+//		-------
+	
+	public List<Reserva> consultarReservas (LocalDate fechaInicio, LocalDate fechaFinal){
+		if(fechaInicio.isAfter(fechaFinal) || fechaInicio.isEqual(fechaFinal)) {
+			return null;
+		}
+		else {
+		//se crean dos listas, la primera va a almacenar las reservas que cumplan la condicion de estar entre las 2 fechas
+		//la segunda lista contiene todas las reservas del medico en cuestion	
+			List<Reserva> reservasEntreFechas = new ArrayList<Reserva>();
+			List<Reserva> todasReservasMedico = getReservas();
+			//se recorre la lista de todas las reservas del medico y se pregunta si cumple con la condicion
+			for(Reserva reserv:todasReservasMedico) {
+				//creacion de un LocalDate a partir del LocalDateTime de la reserva
+				LocalDate fReserva = LocalDate.of( reserv.getFechaHora().getYear(),  reserv.getFechaHora().getMonthValue(),  reserv.getFechaHora().getDayOfMonth());
+				if((fReserva.isAfter(fechaInicio) || fReserva.isEqual(fechaInicio)) && (fReserva.isBefore(fechaFinal) || fReserva.isEqual(fechaFinal))) {
+					reservasEntreFechas.add(reserv);
+				}
+			}
+			return reservasEntreFechas;
+		}
+	}
 	
 	
-//	public List<Reserva> consultarReservas (LocalDate fechaInicio, LocalDate fechaFinal){
-//		if(fechaInicio.isAfter(fechaFinal) || fechaInicio.isEqual(fechaFinal)) {
-//		return null;
-//		}
-//		else {
-//			List<Reserva> reservasEntreFechas = new ArrayList<Reserva>();
-//			List<Reserva> todasReservas = reservaDao.
-//			for() {
-//				
-//			}
-//			
-//			
-//			return reservasEntreFechas;
-//		}
-//	}
+	public List<Paciente> mostrarPacientes(int edad){
+		List<Paciente> pacientes = new ArrayList<>();
+		for(Reserva reserv:getReservas()) {
+			Paciente paciente = reserv.getPaciente();
+			pacientes.add(paciente);
+		}
+		if(edad<1 || edad >100) {
+			return null;
+		}
+		else {
+			return pacientes;
+		}
+		
+	}
 	
 }

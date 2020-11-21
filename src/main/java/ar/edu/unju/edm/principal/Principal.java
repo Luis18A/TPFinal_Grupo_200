@@ -54,7 +54,7 @@ public class Principal {
 		boolean ing;
 		do {
 			do {
-				System.out.println("---------------------------MENU----------------------------");
+				System.out.println("\n---------------------------MENU----------------------------");
 				System.out.println("1. Agregar una especialidad ");
 				System.out.println("2. Agregar un médico");
 				System.out.println("3. Agregar un paciente");
@@ -383,20 +383,7 @@ public class Principal {
 				break;
 			case 6:	
 					//SE CONTROLA SI EXISTE EL MEDICO
-					boolean ing6;
-					int matriculaIngresada2=0;
-					do {
-						ing6=true;
-						System.out.println("Ingrese matrícula del médico: ");
-						try {
-							matriculaIngresada2 = sc.nextInt();
-						}catch(InputMismatchException i) {
-							System.out.println("\nINGRESO ERRONEO. Debe ingresar un NÚMERO de matrícula.\n");
-							sc.next();
-							ing6=false;
-						}
-					}while (ing6==false);
-					Medico medicoBuscado = medicoDao.buscarMedico(matriculaIngresada2);
+					Medico medicoBuscado = controlarMedico();
 					if(medicoBuscado==null) {
 						System.out.println("\nEL MÉDICO NO EXISTE!");
 					}
@@ -405,16 +392,29 @@ public class Principal {
 						LocalDate fechaInicio = ingresarFecha();
 						System.out.println("\n----FECHA FINAL: \n");
 						LocalDate fechaFinal = ingresarFecha();	
-//						System.out.println(medicoBuscado.num());;
-//						List<Reserva>reservas = medicoBuscado.consultarReservas(fechaInicio,fechaFinal);
-//						if(reservas==null) {
-//							System.out.println("\nLA FECHA INICIAL DEBE SER ANTERIOR A LA FECHA FINAL. INGRESE NUEVOS VALORES.");
-//						}else {
-//							
-//						}
+						System.out.println("\nLas reservas que existen entre las fechas ingresadas son: \n");
+						List<Reserva> reservas = medicoBuscado.consultarReservas(fechaInicio,fechaFinal);
+						if(reservas==null) {
+							System.out.println("\nLA FECHA INICIAL DEBE SER ANTERIOR A LA FECHA FINAL!");
+						}else {
+							if(reservas.isEmpty()) {
+								System.out.println("\nNo hay reservas entre las dos fechas ingresadas.");
+							}else {
+								reservas.stream().forEach(System.out::println);
+							}
+						}
 					}
 				break;
-			case 7:
+			case 7: //SE CONTROLA SI EXISTE EL MEDICO
+					Medico medicoBuscado2 = controlarMedico();
+						if(medicoBuscado2==null) {
+							System.out.println("\nEL MÉDICO NO EXISTE!");
+						}else {
+							System.out.println("Ingrese una edad (entre 1 y 100): ");
+							int edad = sc.nextInt();
+							List<Paciente> pacientes = medicoBuscado2.mostrarPacientes(edad);
+							
+						}
 				break;
 			case 8: //se controla el ingreso del id a buscar
 					Long idBuscado = controlarIdObraSocial();
@@ -426,21 +426,21 @@ public class Principal {
 						System.out.print("\nLa obra social es: ");
 						System.out.println(obraSocialDao.buscarObraSocial(idBuscado).getNombre()+"\n");
 				
-//						if(pacienteDao.obtenerTodosPacientes().stream().filter(f->f.getObraSocial().getId()==idBuscado).count()==0) {
-//							System.out.println("\nNo existen pacientes registrados con esta Obra Social!");
-//						}
-//						else {
-//							pacienteDao.obtenerTodosPacientes().stream().filter(f->f.getObraSocial().getId()==idBuscado).forEach(System.out::println);
-//						}
-						
-						
-						//sacar, son pruebas
-//						System.out.println(medicoDao.buscarMedico(2).getReservas());
-						List<Paciente> pacientesObraSocial = obraSocialDao.obtenerPacientesObraSocial(idBuscado);
-						for(Paciente pacient:pacientesObraSocial) {
-							//el problema esta en el getReservas() de cada paciente, sale un stackoverflow
-								System.out.println(pacient);
+						if(pacienteDao.obtenerTodosPacientes().stream().filter(f->f.getObraSocial().getId()==idBuscado).count()==0) {
+							System.out.println("\nNo existen pacientes registrados con esta Obra Social!");
 						}
+						else {
+							pacienteDao.obtenerTodosPacientes().stream().filter(f->f.getObraSocial().getId()==idBuscado).forEach(System.out::println);
+						}
+						
+						
+						//SACARRRR, son pruebas
+//						System.out.println(medicoDao.buscarMedico(2).getReservas());
+//						List<Paciente> pacientesObraSocial = obraSocialDao.obtenerPacientesObraSocial(idBuscado);
+//						for(Paciente pacient:pacientesObraSocial) {
+//							//el problema esta en el getReservas() de cada paciente, sale un stackoverflow
+//								System.out.println(pacient);
+//						}
 					}
 				break;
 			case 9:	
@@ -480,6 +480,8 @@ public class Principal {
 						System.out.println("No hay médicos cargados!");
 					}else {
 						medicoDao.obtenerTodosMedicos().stream().forEach(System.out::println);
+						
+//						SACARRR
 //						medicoDao.obtenerTodosMedicos().stream().forEach((m)->{m.toString();});
 //						medicoDao.obtenerTodasReservas().stream().forEach(System.out::println);
 //						List<Reserva> reservas = medicoDao.obtenerTodasReservas(1l);
@@ -526,7 +528,25 @@ public class Principal {
 	
 	
 	
-	
+	public static Medico controlarMedico() {
+		IMedicoDao medicoDao = new MedicoDaoImp();
+		Scanner sc = new Scanner(System.in);
+		boolean ing6;
+		int matriculaIngresada2=0;
+		do {
+			ing6=true;
+			System.out.println("Ingrese matrícula del médico: ");
+			try {
+				matriculaIngresada2 = sc.nextInt();
+			}catch(InputMismatchException i) {
+				System.out.println("\nINGRESO ERRONEO. Debe ingresar un NÚMERO de matrícula.\n");
+				sc.next();
+				ing6=false;
+			}
+		}while (ing6==false);
+		Medico medicoBuscado = medicoDao.buscarMedico(matriculaIngresada2);
+		return medicoBuscado;
+	}
 	
 	
 	

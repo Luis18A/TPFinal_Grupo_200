@@ -118,7 +118,7 @@ public class Principal {
 			}
 			
 			
-		}while(op!=9);
+		}while(op!=15);
 		
 			
 	}

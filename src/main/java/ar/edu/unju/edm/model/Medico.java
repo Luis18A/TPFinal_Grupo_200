@@ -15,7 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import ar.edu.unju.edm.dao.IMedicoDao;
+import ar.edu.unju.edm.dao.imp.MedicoDaoImp;
 
 @Entity
 @Table(name="medicos")

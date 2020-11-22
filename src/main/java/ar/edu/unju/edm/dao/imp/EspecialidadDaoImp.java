@@ -8,7 +8,6 @@ import ar.edu.unju.edm.conf.EmfSingleton;
 import ar.edu.unju.edm.dao.IEspecialidadDao;
 import ar.edu.unju.edm.model.Especialidad;
 import ar.edu.unju.edm.model.Medico;
-import ar.edu.unju.edm.model.Reserva;
 
 public class EspecialidadDaoImp implements IEspecialidadDao {
 	

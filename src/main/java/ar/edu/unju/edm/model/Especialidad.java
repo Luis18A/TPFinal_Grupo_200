@@ -12,9 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ar.edu.unju.edm.dao.IEspecialidadDao;
-import ar.edu.unju.edm.dao.IObraSocialDao;
 import ar.edu.unju.edm.dao.imp.EspecialidadDaoImp;
-import ar.edu.unju.edm.dao.imp.ObraSocialDaoImp;
 
 @Entity
 @Table(name="especialidades")

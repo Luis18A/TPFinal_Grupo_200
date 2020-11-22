@@ -120,7 +120,7 @@ public class Principal {
 			
 		}while(op!=9);
 		
-			
+		sc.close();
 	}
 	
 	
@@ -133,6 +133,7 @@ public class Principal {
 		especialidad.setNombre(sc.next());
 		especialidadDao.guardarEspecialidad(especialidad);
 		System.out.println("\nLa especialidad se ha creado con éxito!");
+		sc.close();
 	}
 	
 	public static void agregarMedico() {
@@ -206,6 +207,7 @@ public class Principal {
 			System.out.println("\nEl médico se ha creado con éxito!");
 			}
 		}
+		sc.close();
 	}
 	
 	public static void agregarPaciente() {
@@ -320,7 +322,7 @@ public class Principal {
 			
 		}
 		
-		
+		sc.close();
 	}	
 	
 	public static void agregarObraSocial() {
@@ -333,13 +335,14 @@ public class Principal {
 		obraSocial.setDireccion(sc.next());
 		obraSocialDao.guardarObraSocial(obraSocial);
 		System.out.println("\nLa obra social se ha creado con éxito!");
+		sc.close();
 	}
 	
 	
 	public static void agregarReserva() {
 		Scanner sc = new Scanner(System.in);
 		IMedicoDao medicoDao = new MedicoDaoImp();
-		IObraSocialDao obraSocialDao = new ObraSocialDaoImp();
+		//IObraSocialDao obraSocialDao = new ObraSocialDaoImp();
 		IPacienteDao pacienteDao = new PacienteDaoImp();
 		IReservaDao reservaDao = new ReservaDaoImp();
 		
@@ -398,7 +401,7 @@ public class Principal {
 					ingr4=false;
 				}
 			}while(ingr4==false);
-			boolean cond;
+			//boolean cond;
 			do {
 				ingr5=true;
 				try {
@@ -517,6 +520,7 @@ public class Principal {
 				fechaHoraIngB=false;
 			}
 		}while(fechaHoraIngB==false);
+		sc.close();
 	}
 	
 	
@@ -580,6 +584,7 @@ public class Principal {
 				}
 				
 			}
+			sc.close();
 	}
 	
 	
@@ -643,6 +648,7 @@ public class Principal {
 		}else {
 			System.out.println("\nNo existe la reserva!");
 		}
+		sc.close();
 	}
 	
 	public static void listarReservas() {
@@ -701,10 +707,6 @@ public class Principal {
 	}
 	
 	
-
-	
-	
-	
 	
 	public static Medico controlarMedico() {
 		IMedicoDao medicoDao = new MedicoDaoImp();
@@ -723,6 +725,7 @@ public class Principal {
 			}
 		}while (ing6==false);
 		Medico medicoBuscado = medicoDao.buscarMedico(matriculaIngresada2);
+		sc.close();
 		return medicoBuscado;
 	}
 
@@ -740,7 +743,8 @@ public class Principal {
 				sc.next();
 				d=false;
 			}
-		}while (d==false);		
+		}while (d==false);	
+		sc.close();
 		return idBuscad;
 	}
 	
@@ -798,7 +802,7 @@ public class Principal {
 				fechaIng=false;
 			}
 		}while(fechaIng==false);
-		
+		sc.close();
 		return fecha;
 	}
 	

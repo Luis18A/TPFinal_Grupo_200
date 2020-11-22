@@ -3,7 +3,6 @@ package ar.edu.unju.edm.dao.imp;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import ar.edu.unju.edm.conf.EmfSingleton;
 import ar.edu.unju.edm.dao.IReservaDao;

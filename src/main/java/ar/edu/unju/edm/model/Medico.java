@@ -2,7 +2,6 @@ package ar.edu.unju.edm.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import ar.edu.unju.edm.dao.IMedicoDao;
-import ar.edu.unju.edm.dao.IReservaDao;
-import ar.edu.unju.edm.dao.imp.MedicoDaoImp;
-import ar.edu.unju.edm.dao.imp.ReservaDaoImp;
+
 
 @Entity
 @Table(name="medicos")

@@ -11,9 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import ar.edu.unju.edm.dao.IMedicoDao;
 import ar.edu.unju.edm.dao.IObraSocialDao;
-import ar.edu.unju.edm.dao.imp.MedicoDaoImp;
 import ar.edu.unju.edm.dao.imp.ObraSocialDaoImp;
 
 @Entity

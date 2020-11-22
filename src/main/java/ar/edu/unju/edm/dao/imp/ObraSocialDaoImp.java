@@ -8,7 +8,6 @@ import ar.edu.unju.edm.conf.EmfSingleton;
 import ar.edu.unju.edm.dao.IObraSocialDao;
 import ar.edu.unju.edm.model.ObraSocial;
 import ar.edu.unju.edm.model.Paciente;
-import ar.edu.unju.edm.model.Reserva;
 
 public class ObraSocialDaoImp implements IObraSocialDao {
 	

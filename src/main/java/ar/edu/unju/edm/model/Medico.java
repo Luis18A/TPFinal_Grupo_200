@@ -101,8 +101,8 @@ public class Medico implements Serializable{
 
 	public List<Reserva> getReservas() {
 		//si no se agrega lo siguiente devuelve listas vacias
-//		IMedicoDao medicoDao = new MedicoDaoImp();
-//		reservas = medicoDao.obtenerTodasReservas(getId());
+		IMedicoDao medicoDao = new MedicoDaoImp();
+		reservas = medicoDao.obtenerTodasReservas(getId());
 		return reservas;
 	}
 
@@ -125,20 +125,10 @@ public class Medico implements Serializable{
 
 	@Override
 	public String toString() {
-//		IReservaDao reservaDao = new ReservaDaoImp();
-//		reservaDao.obtenerTodasReservas().stream().filter(f->f.getMedico().getId()==id).forEach(System.out::println);
-//		reservas.forEach((m)->{m.toString();});
 		return "MEDICO [id=" + id + ", matricula=" + matricula + ", dni=" + dni + ", nombre=" + nombre + ", apellido="
 				+ apellido + ", telefono=" + telefono + ", ESPECIALIDAD=" + getEspecialidad().getNombre() + ", RESERVAS=" + getReservas()
 				+ "]";
 	}
-	
-	//SACARRR
-//	public int num() {
-//		int n = (int)getReservas().stream().count();
-//		return n;
-//	}
-//		-------
 	
 	public List<Reserva> consultarReservas (LocalDate fechaInicio, LocalDate fechaFinal){
 		if(fechaInicio.isAfter(fechaFinal) || fechaInicio.isEqual(fechaFinal)) {

@@ -38,7 +38,6 @@ public class MedicoTest {
 		assertEquals(true,medico.mostrarPacientes(80).isEmpty());
 	}
 
-	
 	/*
  * @Test
 	public void mostrarReservas() {
